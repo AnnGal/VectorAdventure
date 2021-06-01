@@ -19,23 +19,23 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        fillPathsArray()
+/*        fillPathsArray()
 
-        vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)
+        vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)*/
 
-        setButtonsBehavior()
+        //setButtonsBehavior()
     }
 
-    private fun fillPathsArray() {
+/*    private fun fillPathsArray() {
         val vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)
 
         paths.add(VectorElement("first", R.color.color_yellow_active, R.color.color_yellow_inactive))
         paths.add(VectorElement("second", R.color.color_red_active, R.color.color_red_inactive))
         paths.add(VectorElement("third", R.color.color_blue_active, R.color.color_blue_inactive))
         paths.add(VectorElement("fourth", R.color.color_black_active, R.color.color_black_inactive))
-    }
+    }*/
 
-    private fun setButtonsBehavior() {
+/*    private fun setButtonsBehavior() {
         binding.btnMakeInactive.setOnClickListener {
             val vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)
 
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 vector.findPathByName(paths[i].path).fillColor = getColor(color)
             }
         }
-    }
+    }*/
 
 
 }

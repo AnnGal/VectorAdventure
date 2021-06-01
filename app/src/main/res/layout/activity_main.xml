@@ -7,26 +7,40 @@
     tools:context="an.gal.android.vectoradventure.MainActivity">
 
     <Button
-        android:id="@+id/btn_make_inactive"
+        android:id="@+id/btn_make_active2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Dull"
+        android:text="Long"
         app:layout_constraintBottom_toTopOf="@+id/btn_make_random"
         app:layout_constraintEnd_toStartOf="@+id/btn_make_active"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btn_make_inactive" />
 
     <Button
         android:id="@+id/btn_make_active"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Vivid"
+        android:text="X"
         app:layout_constraintBottom_toTopOf="@+id/btn_make_random"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_make_inactive" />
+        app:layout_constraintStart_toEndOf="@+id/btn_make_active2" />
+
+    <Button
+        android:id="@+id/btn_make_inactive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Simple"
+        app:layout_constraintBottom_toTopOf="@+id/btn_make_random"
+        app:layout_constraintEnd_toStartOf="@+id/btn_make_active2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -46,21 +60,21 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/vector_image"
         app:layout_constraintBottom_toTopOf="@+id/btn_make_inactive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/ic_curly_brackets_icon" />
+        app:srcCompat="@drawable/ic_metro" />
 
     <Button
         android:id="@+id/btn_make_random"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="Random"
+        android:text="Clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_make_active"
         app:layout_constraintStart_toStartOf="@+id/btn_make_inactive" />
