@@ -4,13 +4,21 @@ import an.gal.android.vectoradventure.databinding.ActivityMainBinding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
+import android.widget.ImageView
 import com.devs.vectorchildfinder.VectorChildFinder
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     //private lateinit var vector: VectorChildFinder
+
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
+    private var scaleFactor = 1.0f;
 
     private val paths = arrayListOf<VectorElement>()
 
@@ -24,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)*/
 
-
+        scaleGestureDetector = ScaleGestureDetector(this, ScaleListener());
         setButtonsBehavior()
     }
 
@@ -126,44 +134,83 @@ class MainActivity : AppCompatActivity() {
         vector.findPathByName("m1_5_6").fillColor = getColor(R.color.color_red_active)*/
     }
 
-/*    private fun fillPathsArray() {
-        val vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        scaleGestureDetector.onTouchEvent(event)
+        return true
+    }
 
-        paths.add(VectorElement("first", R.color.color_yellow_active, R.color.color_yellow_inactive))
-        paths.add(VectorElement("second", R.color.color_red_active, R.color.color_red_inactive))
-        paths.add(VectorElement("third", R.color.color_blue_active, R.color.color_blue_inactive))
-        paths.add(VectorElement("fourth", R.color.color_black_active, R.color.color_black_inactive))
-    }*/
+    private inner class ScaleListener : ScaleGestureDetector.OnScaleGestureListener {
 
-/*    private fun setButtonsBehavior() {
-        binding.btnMakeInactive.setOnClickListener {
-            val vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)
-
-            for (i in 0 until paths.size){
-                vector.findPathByName(paths[i].path).fillColor = getColor(paths[i].colorInactive)
-            }
+        override fun onScale(detector: ScaleGestureDetector?): Boolean {
+            scaleFactor = (detector?.scaleFactor ?: 1.0f)
+            scaleFactor = max(0.1f, min(scaleFactor, 10.0f));
+            binding.imageView.scaleX = scaleFactor
+            binding.imageView.scaleY = scaleFactor
+            return true;
         }
 
-        binding.btnMakeActive.setOnClickListener {
-            val vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)
-
-            for (i in 0 until paths.size){
-                vector.findPathByName(paths[i].path).fillColor = getColor(paths[i].colorActive)
-            }
+        override fun onScaleBegin(detector: ScaleGestureDetector?): Boolean {
+            return true
         }
 
-        binding.btnMakeRandom.setOnClickListener {
-            // array of randoms
-            val vector = VectorChildFinder(this, R.drawable.ic_curly_brackets_icon, binding.imageView)
-            val booleanArray = BooleanArray(paths.size) { Random.nextBoolean() }
+        override fun onScaleEnd(detector: ScaleGestureDetector?) {
 
-            // set random activity status
-            for (i in 0 until paths.size){
-                val color = if (booleanArray[i]) paths[i].colorActive else paths[i].colorInactive
-                vector.findPathByName(paths[i].path).fillColor = getColor(color)
-            }
         }
-    }*/
-
-
+    }
 }
+
+
+
+/*
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        scaleGestureDetector.onTouchEvent(motionEvent);
+        return true;
+    }
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+            mScaleFactor *= scaleGestureDetector.getScaleFactor();
+            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 10.0f));
+            imageView.setScaleX(mScaleFactor);
+            imageView.setScaleY(mScaleFactor);
+            return true;
+        }
+    }
+*/
+
+
+/*
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.widget.ImageView;
+public class MainActivity extends AppCompatActivity {
+   private ScaleGestureDetector scaleGestureDetector;
+   private float mScaleFactor = 1.0f;
+   private ImageView imageView;
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_main);
+      imageView=findViewById(R.id.imageView);
+      scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
+   }
+   @Override
+   public boolean onTouchEvent(MotionEvent motionEvent) {
+      scaleGestureDetector.onTouchEvent(motionEvent);
+      return true;
+   }
+   private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+      @Override
+      public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+         mScaleFactor *= scaleGestureDetector.getScaleFactor();
+         mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 10.0f));
+         imageView.setScaleX(mScaleFactor);
+         imageView.setScaleY(mScaleFactor);
+         return true;
+      }
+   }
+}
+* */
